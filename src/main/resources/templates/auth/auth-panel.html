@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Travel Login</title>
+    <link rel="stylesheet" th:href="@{/css/auth-style.css}">
+</head>
+<body>
+<div class="background"></div>
+<div class="overlay"></div>
+
+<!-- Самолет -->
+<img class="plane" th:src="@{/img/plane.png}" alt="plane">
+
+<!-- Облака -->
+<div class="clouds">
+    <div class="cloud cloud1"> <img th:src="@{/img/cloude.png}" alt="cloude"></div>
+    <div class="cloud cloud2"> <img th:src="@{/img/cloude.png}" alt="cloude"></div>
+    <div class="cloud cloud3"> <img th:src="@{/img/cloude.png}" alt="cloude"></div>
+</div>
+
+
+
+<!-- Корабль и волны -->
+<img class="ship" th:src="@{/img/ship.png}" alt="ship">
+<div class="ocean">
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+</div>
+
+<!-- Контейнер с кнопками -->
+<div class="container" id="mainContainer">
+    <h1>Навстречу путешествиям!</h1>
+    <button class="btn btn-login" id="showVhod">Войти</button>
+    <button class="btn btn-register" id="showRegister">Зарегистрироваться</button>
+    <footer>© 2025 TravelSite</footer>
+</div>
+<div class="container" id="registerForm" style="display:none;">
+    <h1>Регистрация</h1>
+    <form class="reg">
+        <input type="text" placeholder="Имя" name="username" required pattern=".*\S.*" title="Имя не может быть пустым или состоять только из пробелов">
+        <input type="email" placeholder="Email" name="email" required>
+        <input type="password" placeholder="Пароль" name="password" required pattern=".*\S.*" title="Пароль не может быть пустым или состоять только из пробелов">
+        <input type="password" placeholder="Повторите пароль" required pattern=".*\S.*" title="Пароль не может быть пустым или состоять только из пробелов">
+
+        <button onclick="register()" type="submit" class="btn btn-register">Зарегистрироваться</button>
+    </form>
+    <button id="cancelRegister" class="btn" style="background: rgba(255,255,255,0.2); margin-top:10px;">Отмена</button>
+</div>
+<div class="container" id="vhodForm" style="display:none;">
+    <h1>Вход</h1>
+    <form class="vhod">
+        <input type="email" placeholder="Email" required name="email" >
+        <input type="password" placeholder="Пароль" required name="password">
+        <button onclick="vhod()" type="submit" class="btn btn-register">Войти</button>
+    </form>
+    <button id="cancelVhod" class="btn" style="background: rgba(255,255,255,0.2); margin-top:10px;">Отмена</button>
+</div>
+<div id="errorModal" class="modal" style="display:none;">
+    <div class="modal-content">
+        <p id="modalMessage"></p>
+        <button id="modalOkBtn">OK</button>
+    </div>
+</div>
+<script th:src="@{/script/auth-script.js}"></script>
+
+</body>
+</html>

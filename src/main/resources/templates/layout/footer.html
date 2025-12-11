@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<footer th:fragment="footer">
+    <div class="footer-container">
+        <div class="footer-col">
+            <h4>Контакты</h4>
+            <p>📞 +7 (888) 111-11-11</p>
+            <a href="mailto:anton.luchko73@gmail.com">✉️ anton.luchko73@gmail.com</a>
+            <p id="workingHours">
+                🕓 Пн-Пт: 9:00 – 18:00
+                <span id="tooltip"
+                      style="display:none;
+                     position:absolute;
+                     background:#0b3d91;
+                     color:#fff;
+                     padding:6px 10px;
+                     border-radius:5px;
+                     font-size:14px;
+                     white-space:nowrap;
+                     z-index:100;
+                     box-shadow:0 3px 10px rgba(0,0,0,0.2);"></span>
+            </p>
+        </div>
+
+        <div class="footer-col">
+            <h4>Адрес</h4>
+            <a href="#">
+                <span>г. Ульяновск, ул. Вымышленная, 10</span>
+                <span>Офис 204, ТЦ «Олимп»</span>
+            </a>
+        </div>
+
+        <div class="footer-col">
+            <h4>Качество и политика</h4>
+            <p><span class="quality-mark">✔</span> ISO 9001:2015</p>
+            <a href="#">Политика конфиденциальности</a>
+            <a href="#">Пользовательское соглашение</a>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        © 2025 Java413. Все права защищены. Сделано с ❤️ для путешественников.
+    </div>
+</footer>
+</body>
+</html>

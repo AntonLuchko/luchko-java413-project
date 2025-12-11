@@ -1,0 +1,66 @@
+/* ===== SHIFT CONTENT WHEN MENU OPEN ===== */
+#pageContent {
+    transition: transform 0.32s ease;
+}
+
+.content-shift {
+    transform: translateY(250px);
+}
+
+/* ===== MANAGER BLOCK ===== */
+.manager .bg {
+    width: 100%;
+    height: 100%;
+    object-position: center;
+    top: 0;
+    left: 0;
+}
+.manager {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+.manager img {
+    width: 35vmin;
+    position: absolute;
+    bottom: 0;
+    left: 35%;
+}
+.speech-bubble {
+    position: absolute;
+    bottom: 65%;
+    left: 45%;
+    max-width: 200px;
+    padding: 10px 15px;
+    background: #fff;
+    color: #0b3d91;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    font-size: 14px;
+    line-height: 1.4;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.speech-bubble::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 15px;
+    border-width: 10px 10px 0 0;
+    border-style: solid;
+    border-color: #fff transparent transparent transparent;
+}
+
+.speech-bubble ul li {
+    padding: 6px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.speech-bubble ul li:hover {
+    background: #ffd700;
+    color: #0b3d91;
+}

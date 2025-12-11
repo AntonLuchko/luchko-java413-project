@@ -1,0 +1,215 @@
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.admin-panel {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    margin-bottom: 10px;
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 2.5rem;
+    color: #fff;
+}
+
+.btn {
+    display: inline-block;
+    margin: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #fff;
+}
+
+.btn-all { background-color: #4caf50; }
+.btn-blocked { background-color: #f44336; }
+.btn-active { background-color: #2196f3; }
+.btn-temp { background-color: #ff9800; }
+.btn-search { background-color: #9c27b0; }
+.btn-reviews {background-color: greenyellow}
+.btn-xit {background-color: teal}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+#search-container {
+    margin-top: 10px;
+    display: none;
+    flex-direction: row;
+    gap: 10px;
+}
+
+#search-input {
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: none;
+    font-size: 1rem;
+}
+
+select {
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 1rem;
+    border: none;
+}
+
+table {
+    width: 90%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+th, td {
+    border: 1px solid #fff;
+    padding: 12px;
+    text-align: center;
+}
+
+th {
+    background-color: rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+}
+
+.arrow {
+    margin-left: 5px;
+    font-size: 0.8rem;
+}
+
+button.action-btn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #fff;
+}
+
+.btn-block { background-color: #f44336; }
+.btn-unblock { background-color: #4caf50; }
+
+input.block-reason {
+    width: 90%;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+}
+
+.pages button.active {
+    background-color: #4CAF50; /* зелёный фон */
+    color: white;              /* белый текст */
+    font-weight: bold;
+}
+.pages button {
+    margin: 0 2px;
+    padding: 5px 10px;
+}
+
+@media (max-width: 600px) {
+    .btn { width: 100%; margin: 10px 0; }
+    table { width: 100%; }
+    #search-container { flex-direction: column; width: 90%; }
+    #search-input { width: 100%; }
+    select { width: 100%; }
+}
+
+/* ======================= */
+/*       НОВЫЕ СТИЛИ       */
+/* ======================= */
+
+/* Обёртка таблицы */
+#table-container {
+    width: 90%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Поиск (исправление класса) */
+.search-container {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Кнопки внутри search-container */
+.search-container .btn-search {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+}
+
+/* Кнопки внутри таблицы */
+button.action-btn {
+    transition: all 0.2s ease;
+}
+
+button.action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+}
+
+/* Пагинация */
+.pages button {
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: rgba(0,0,0,0.4);
+    color: #fff;
+    transition: all 0.2s ease;
+}
+
+.pages button.active {
+    background-color: #4caf50;
+    font-weight: bold;
+}
+
+.pages button:hover {
+    background-color: #2196f3;
+}
+
+/* Стрелки пагинации */
+#pagination-container > button:first-child,
+#pagination-container > button:last-child {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: rgba(0,0,0,0.4);
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#pagination-container > button:first-child:hover,
+#pagination-container > button:last-child:hover {
+    background-color: #2196f3;
+}
+
+/* Сообщение пустой таблицы */
+.empty {
+    display: none;
+    text-align: center;
+    margin-top: 50px;
+    font-size: 2rem;
+    color: #fff;
+}

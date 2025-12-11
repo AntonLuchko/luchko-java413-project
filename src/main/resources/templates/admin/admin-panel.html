@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" th:href="@{/css/admin-style.css}">
+</head>
+<body>
+<div class="admin-panel">
+
+    <h1>Панель администратора</h1>
+    <button class="btn btn-all" onclick="setGroup('all',0,'clear')">Все пользователи</button>
+    <button class="btn btn-blocked" onclick="setGroup('blocked',0,'clear')">Заблокированные</button>
+    <button class="btn btn-active" onclick="setGroup('active',0,'clear')">Доступные</button>
+    <button class="btn btn-temp" onclick="setGroup('temp',0,'clear')">Временно заблокированные</button>
+    <button class="btn btn-search" onclick="toggleSearch()">Поиск</button>
+    <button class="btn btn-reviews" onclick="setGroup('reviews',0,'clear')">Отзывы</button>
+    <button class="btn btn-exit" onclick="exit()">Выход</button>
+
+    <div class="search-container" style="display: none;">
+        <input type="text" id="search-input" placeholder="Введите значение">
+        <select id="search-field">
+            <option value="id">ID</option>
+            <option value="name">Name</option>
+            <option value="email">Email</option>
+        </select>
+        <button class="btn btn-search" onclick="setGroup('find',0,'clear')">Найти</button>
+        <button class="btn btn-search" onclick="reverse()">Назад</button>
+    </div>
+
+</div>
+<div id="table-container">
+</div>
+<div id="pagination-container">
+    <button style="display: none;">
+        &#8592;
+    </button>
+    <div class="pages" style="display: inline-block;"></div>
+    <button style="display: none;">
+        &#8594;
+    </button>
+</div>
+<div class="empty" style="display: none"> <h1>Данные не найдены!</h1></div>
+<script th:src="@{/script/admin-script.js}"></script>
+</body>
+</html>

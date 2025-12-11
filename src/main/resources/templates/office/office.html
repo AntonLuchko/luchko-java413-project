@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/layout-main:: html(content=~{::main})}">
+<body>
+<main>
+    <div id="pageContent">
+
+        <div class="manager">
+            <img class="bg" th:src="@{/img/office.jpg}" alt="офис">
+            <img class="people" th:src="@{/gif/speak.gif}" alt="говорящий менеджер" >
+            <div class="speech-bubble" id="speechBubble">
+                <p id="speechText"></p>
+            </div>
+        </div>
+</main>
+</body>
+</html>

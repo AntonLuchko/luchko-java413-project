@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Путешествия!</title>
+      <link rel="stylesheet" th:href="@{/css/footer-style.css}">
+    <link rel="stylesheet" th:href="@{/css/header-style.css}">
+    <link rel="stylesheet" th:href="@{/css/office-style.css}">
+    <link rel="stylesheet" th:href="@{/css/global-style.css}">
+</head>
+<body>
+<header th:replace="~{layout/header::header}"></header>
+
+<div class="container">
+    <main th:replace="${content}"></main>
+
+</div>
+<footer th:replace="~{layout/footer::footer}"></footer>
+
+<script th:src="@{/script/header-script.js}"></script>
+<script th:src="@{/script/footer-script.js}"></script>
+<script th:src="@{/script/office-script.js}"></script>
+</body>
+</html>
