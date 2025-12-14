@@ -7,6 +7,10 @@
     <link rel="stylesheet" th:href="@{/css/header-style.css}">
     <link rel="stylesheet" th:href="@{/css/office-style.css}">
     <link rel="stylesheet" th:href="@{/css/global-style.css}">
+    <link rel="stylesheet" th:href="@{/css/reviews-style.css}">
+    <link rel="stylesheet" th:href="@{/css/notifications-style.css}">
+    <link rel="stylesheet" th:href="@{/css/ticket-style.css}">
+    <link rel="stylesheet" th:href="@{/css/myTicket-style.css}">
 </head>
 <body>
 <header th:replace="~{layout/header::header}"></header>
@@ -17,8 +21,20 @@
 </div>
 <footer th:replace="~{layout/footer::footer}"></footer>
 
+
+
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1.5.2/dist/sockjs.min.js" ></script>
+<script src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js" ></script>
 <script th:src="@{/script/header-script.js}"></script>
 <script th:src="@{/script/footer-script.js}"></script>
 <script th:src="@{/script/office-script.js}"></script>
+<script th:src="@{/script/reviews-script.js}"></script>
+<script th:src="@{/script/notifications-script.js}"></script>
+<script th:src="@{/script/ticket-script.js}"></script>
+<script th:src="@{/script/myTicket-script.js}"></script>
+
+
+
+
 </body>
 </html>

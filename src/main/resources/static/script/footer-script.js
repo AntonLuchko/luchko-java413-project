@@ -1,4 +1,4 @@
-// ===== FOOTER =====
+
 const workingHours = document.getElementById('workingHours');
 const tooltip = document.getElementById('tooltip');
 

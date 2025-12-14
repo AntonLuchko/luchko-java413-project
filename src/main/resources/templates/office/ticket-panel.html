@@ -1,0 +1,28 @@
+<div class="tb-container">
+    <h2>Купить билет</h2>
+    <form id="tb-ticketForm">
+        <label for="tb-from" class="tb-label">Откуда:</label>
+        <input type="text" id="tb-from" name="from" class="tb-input" placeholder="Город отправления" required>
+
+        <label for="tb-to" class="tb-label">Куда:</label>
+        <input type="text" id="tb-to" name="to" class="tb-input" placeholder="Город назначения" required>
+
+        <label for="tb-date" class="tb-label">Дата поездки:</label>
+        <input type="date" id="tb-date" name="date" class="tb-input" required>
+
+        <label for="tb-type" class="tb-label">Тип транспорта:</label>
+        <select id="tb-type" name="type" class="tb-select" required>
+            <option value="">Выберите транспорт</option>
+            <option value="bus">Автобус</option>
+            <option value="train">Поезд</option>
+            <option value="plane">Самолёт</option>
+        </select>
+
+
+        <button type="submit" class="tb-button">Купить билет</button>
+    </form>
+
+    <div class="tb-confirmation" id="tb-confirmation">
+        Ваш билет успешно забронирован!
+    </div>
+</div>

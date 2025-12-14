@@ -54,4 +54,6 @@ public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest regist
         return ResponseEntity.ok(response);
     }
 
+
+
 }

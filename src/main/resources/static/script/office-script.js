@@ -1,9 +1,3 @@
-
-
-
-
-// ===== MAIN / MANAGER =====
-start()
 function start(){ const speechBubble = document.getElementById('speechBubble');
     const speechText = document.getElementById('speechText');
     const managerImg = document.querySelector('.people');
@@ -14,7 +8,7 @@ function start(){ const speechBubble = document.getElementById('speechBubble');
 
     const introText = "Привет! Я виртуальный помощник нашего онлайн офиса. Я могу ответить на часто задаваемые вопросы.";
     const faqItems = [
-        "Как начать путешествие?",
+        "Купить билет",
         "Как связаться с оператором?",
         "Что делать в случае отмены путешествия?"
     ];
@@ -70,23 +64,35 @@ function start(){ const speechBubble = document.getElementById('speechBubble');
             li.addEventListener("click", () => {
                 let answerText = "";
                 if (index === 0) {
-                    answerText = "Наверху панели есть кнопка Старт. Нажми на нее, чтобы выбрать материк и получить наш вариант отдыха!";
-                    startBtn.style.background = "#ffd700";
-                    startBtn.style.color = "#0b3d91";
+                    answerText = "Сейчас я переведу тебя на страничку где ты можешь купить нужный тебе билет!";
                 } else if (index === 1) {
                     answerText = "На нижней панели указана контактная информация. Будем рады ответить на все ваши вопросы!";
                 } else if (index === 2) {
                     answerText = "Пожалуйста, уточните информацию у оператора.";
                 }
 
+
+                li.style.pointerEvents = "none";
+
                 typeText(answerText, speechText, 40, () => {
+                    if(index === 0){
+                        setTimeout(() => {
+                            ticket()
+                                .then(() => {
+                                    acrivBtn();
+                                })
+                                .catch(error => {
+                                    console.error('Ошибка при открытии панели билетов:', error);
+                                });
+                        }, 1000);
+                    } else
                     setTimeout(() => {
-                        startBtn.style.background = "";
-                        startBtn.style.color = "";
                         showFAQ();
-                    }, 2000);
+                        li.style.pointerEvents = "";
+                    }, 1000);
                 });
             });
+
 
             ul.appendChild(li);
         });
@@ -96,4 +102,3 @@ function start(){ const speechBubble = document.getElementById('speechBubble');
 
     // Старт диалога
     typeText(introText, speechText, 50, showFAQ);}
-

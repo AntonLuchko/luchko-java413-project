@@ -3,17 +3,22 @@ package com.example.demo.services;
 import com.example.demo.dto.*;
 import com.example.demo.entity.Notifications;
 import com.example.demo.entity.Reviews;
+import com.example.demo.entity.Ticket;
 import com.example.demo.entity.Users;
 
 import com.example.demo.exception.EmailException;
 import com.example.demo.repositories.NotificationRepository;
 import com.example.demo.repositories.ReviewsRepository;
+import com.example.demo.repositories.TicketRepository;
 import com.example.demo.repositories.UserRepository;
+import com.example.demo.utils.ConvertNotific;
 import com.example.demo.utils.ConverterReview;
+import com.example.demo.utils.ConvertrTicket;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -39,9 +44,13 @@ public class UserService {
     private final ReviewsRepository reviewsRepository;
     private  final ConverterReview converterReview;
     private final NotificationRepository notificationRepository;
+    private final SimpMessagingTemplate simpMessagingTemplate;
+    private final ConvertNotific convertNotific;
+    private final TicketRepository ticketRepository;
+    private final ConvertrTicket convertrTicket;
     private final int pageSize=10;
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder,
-                       JwtService jwtService, AuthenticationManager authenticationManager, ReviewsRepository reviewsRepository, ConverterReview converterReview, NotificationRepository notificationRepository) {
+                       JwtService jwtService, AuthenticationManager authenticationManager, ReviewsRepository reviewsRepository, ConverterReview converterReview, NotificationRepository notificationRepository, SimpMessagingTemplate simpMessagingTemplate, ConvertNotific convertNotific,TicketRepository ticketRepository,ConvertrTicket convertrTicket) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
@@ -49,6 +58,10 @@ public class UserService {
         this.reviewsRepository = reviewsRepository;
         this.converterReview = converterReview;
         this.notificationRepository = notificationRepository;
+        this.simpMessagingTemplate = simpMessagingTemplate;
+        this.convertNotific = convertNotific;
+        this.ticketRepository = ticketRepository;
+        this.convertrTicket = convertrTicket;
     }
 
     public AuthResponse register(RegisterRequest request) {
@@ -105,6 +118,7 @@ public int lockedUser(String email){
 }
 
 
+
     public  int saveReview(TextReview textReview, UserDetails userDetails) {
         Users user=userRepository.findByEmail(userDetails.getUsername())
                  .orElseThrow(() -> new RuntimeException("User not found"));
@@ -141,12 +155,68 @@ public int lockedUser(String email){
 
 
     @Async
-    public void notifyUser(Users user, String message) {
-        Notifications notification = new Notifications(message, user, true);
+    public void notifyUser(String email,Users users, String message) {
+        Notifications notification = new Notifications(message, users, true);
         notificationRepository.save(notification);
 
-        // Дополнительно можно отправлять email, push и т.д.
-        System.out.println("Notification sent to " + user.getEmail() + ": " + message);
+        simpMessagingTemplate.convertAndSend(
+                "/topic/notifications/" + email,
+                message
+        );
+    }
+
+
+    public List<NotificDTO> notifications(UserDetails userDetails) {
+        Users user=userRepository.findByEmail(userDetails.getUsername())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        return notificationRepository.findAllByUserAndDeleetFalse(user).stream().map(x->convertNotific.convert(x)).toList();
+    }
+
+    public Integer countNotifications(UserDetails userDetails) {
+        Users user=userRepository.findByEmail(userDetails.getUsername())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        return notificationRepository.countAllByUserAndDeleetFalse(user);
+
+    }
+
+    public int noActive(Long id){
+        return notificationRepository.noActive(id);
+    }
+
+    public int delNotific(Long id){
+        return notificationRepository.delNotific(id);
+    }
+
+    public int activeNotificationsCount(UserDetails userDetails) {
+        Users user=userRepository.findByEmail(userDetails.getUsername())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        return notificationRepository.countByUserAndActiveTrueAndDeleetFalse(user);
+    }
+
+    public int saveTicket(TicketDT0 ticketDT0,UserDetails userDetails) {
+        Users user=userRepository.findByEmail(userDetails.getUsername())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        Ticket ticket=new Ticket();
+        ticket.setDate(ticketDT0.getDate());
+        ticket.setFromCity(ticketDT0.getFrom());
+        ticket.setToCity(ticketDT0.getTo());
+        ticket.setType(ticketDT0.getType());
+        ticket.setUser(user);
+        System.out.println(user.getId());
+      if(ticketRepository.save(ticket)!=null){
+          return 1;
+      }
+      return 0;
+    }
+
+
+
+    public List<TicketDT0> myTickets(UserDetails userDetails) {
+        Users user=userRepository.findByEmail(userDetails.getUsername())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        return ticketRepository.findAllByUserAndStatusTrue(user).stream().map(x->convertrTicket.convert(x)).toList();
     }
 }
 

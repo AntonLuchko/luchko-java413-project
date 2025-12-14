@@ -50,7 +50,7 @@ int countAllByEmailContainingIgnoreCaseAndRole(String email,Role role);
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE Users u SET u.locked = true, u.lock_time = :lockTime WHERE u.email = :email",nativeQuery = true)
+    @Query(value = "UPDATE Users  SET locked = true, lock_time = :lockTime WHERE email = :email",nativeQuery = true)
     int lockUser(@Param("email") String email, @Param("lockTime") LocalDateTime lockTime);
 
 }

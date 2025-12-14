@@ -157,29 +157,34 @@ private final int pageSize=10;
 //    }
 
     @Transactional
-    public int approveReviews(List<Long> reviewIds) {
+    public int approveReviews(List<Long> reviewIds,String type) {
         int count = 0;
 
         // Загружаем все отзывы одним запросом
         List<Reviews> reviews = reviewsRepository.findAllById(reviewIds);
 
         for (Reviews review : reviews) {
-            review.setStatus(true); // меняем статус
+            if(type.equalsIgnoreCase("good")) {
+                review.setStatus(true);
+            }
             count++;
 
             // Создаём финальные переменные для использования внутри анонимного класса
             final Users user = review.getUser();
             final String reviewText = review.getText();
             final LocalDate reviewDate = review.getDate();
-
-            // Отложенное уведомление после успешного коммита
+            final String email=user.getEmail();
+            System.out.println(user.getId());
+            String message = type.equalsIgnoreCase("good")
+                    ? "Ваш отзыв: \"" + reviewText + "\" от " + reviewDate + " одобрен!"
+                    : "Ваш отзыв: \"" + reviewText + "\" от " + reviewDate + " не одобрен!";
             TransactionSynchronizationManager.registerSynchronization(
                     new TransactionSynchronization() {
                         @Override
                         public void afterCommit() {
                             userService.notifyUser(
-                                    user,
-                                    "Ваш отзыв: \"" + reviewText + "\" от " + reviewDate + " одобрен!"
+                                    email,user,
+                                    message
                             );
                         }
                     }

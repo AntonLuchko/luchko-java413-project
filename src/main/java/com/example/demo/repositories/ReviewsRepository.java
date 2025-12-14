@@ -24,6 +24,6 @@ public interface ReviewsRepository extends JpaRepository<Reviews,Long> {
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE reviews r SET r.status = true WHERE r.id = :id",nativeQuery = true)
+    @Query(value = "UPDATE reviews  SET status = true WHERE id = :id",nativeQuery = true)
     int goodReview(@Param("id") Long id);
 }

@@ -157,11 +157,13 @@ return ResponseEntity.ok(list);
     }
 
     @ResponseBody
-    @GetMapping("/goodReviews")
-    public ResponseEntity<Integer> goodReview(@RequestBody List<Long> listId){
-        int count = adminService.approveReviews(listId);
+    @PostMapping("/goodReviews")
+    public ResponseEntity<Integer> goodReview(@RequestBody List<Long> listId,@RequestParam String type){
+        int count = adminService.approveReviews(listId,type);
         if(count==0){return ResponseEntity.badRequest().build();}
         return ResponseEntity.ok().build();
     }
+
+
 
 }

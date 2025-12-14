@@ -72,6 +72,7 @@ public class SecurityConfig {
                         .requestMatchers("/public/**").permitAll()
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
                         .requestMatchers("/api/user/**").authenticated()
+                        .requestMatchers("/ws-notifications/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .authenticationProvider(authProvider)

@@ -5,7 +5,8 @@ let badReviews=[]
 let empty=document.querySelector('.empty')
 
 async function exit(){
-    localStorage.removeItem('tokenAdmin')
+    sessionStorage.removeItem('tokenAdmin')
+    sessionStorage.removeItem('email')
     try {
         let response = await fetch('/api/auth/vhod')
         if (!response.ok) {
@@ -63,7 +64,7 @@ async function setGroup(params, page, clear) {
     }
 
     const headers = {
-        'Authorization': 'Bearer ' + localStorage.getItem('tokenAdmin'),
+        'Authorization': 'Bearer ' + sessionStorage.getItem('tokenAdmin'),
         'Content-Type': 'application/json'
     };
 
@@ -377,6 +378,21 @@ async function save(typeTable){
             await saveRequest(url,tmpArray)
         }
     }
+
+    if(typeTable=='reviews') {
+        if (goodReviews.length != 0) {
+            url = '/api/admin/goodReviews?type=good'
+            tmpArray = goodReviews
+            await saveRequest(url, tmpArray)
+        }
+        if (badReviews.length != 0) {
+            url = '/api/admin/goodReviews?type=bad'
+            tmpArray = badReviews
+            await saveRequest(url, tmpArray)
+        }
+    }
+
+
     reverse()
 
 }
@@ -390,12 +406,13 @@ async function saveRequest(url,array){
         const response = await fetch(url, {
             method: 'POST',
             headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('tokenAdmin'),
+                'Authorization': 'Bearer ' + sessionStorage.getItem('tokenAdmin'),
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(array)
         });
 
+        console.log(JSON.stringify(array))
         if (!response.ok) {
             throw new Error(`Ошибка запроса: ${response.status}`);
         }

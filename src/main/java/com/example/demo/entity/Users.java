@@ -8,9 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
@@ -49,8 +47,11 @@ public class Users implements UserDetails {
     @Column(nullable = false)
     private boolean locked = false;
 
+
+
     @Column
     private LocalDateTime lockTime;
+
 
     public String getWhyBlocked() {
         return whyBlocked;
@@ -68,6 +69,10 @@ public class Users implements UserDetails {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Notifications> notifications = new ArrayList<>();
+
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Ticket> tickets = new HashSet<>();
 
     public List<Notifications> getNotifications() {
         return notifications;

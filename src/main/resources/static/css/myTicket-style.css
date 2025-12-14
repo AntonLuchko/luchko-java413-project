@@ -1,0 +1,28 @@
+.mytb-container {
+    max-width: 800px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+
+table.mytb-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th.mytb-th, td.mytb-td {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid #ccc;
+}
+
+th.mytb-th {
+    background: #0b3d91;
+    color: #fff;
+}
+
+tr.mytb-tr:hover {
+    background: #e8f0ff;
+}

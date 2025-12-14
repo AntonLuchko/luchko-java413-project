@@ -1,0 +1,54 @@
+.tb-container {
+    max-width: 600px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+
+.tb-container h2 {
+    text-align: center;
+    color: #0b3d91;
+}
+
+.tb-label {
+    display: block;
+    margin: 15px 0 5px;
+    font-weight: 600;
+}
+
+.tb-input, .tb-select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.tb-button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 12px;
+    background: #0b3d91;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.tb-button:hover {
+    background: #1b65d1;
+}
+
+.tb-confirmation {
+    margin-top: 20px;
+    padding: 15px;
+    background: #d4edda;
+    color: #155724;
+    border-radius: 8px;
+    display: none;
+}

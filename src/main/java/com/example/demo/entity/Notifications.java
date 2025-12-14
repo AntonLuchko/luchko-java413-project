@@ -10,7 +10,7 @@ public class Notifications {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false, length = 700)
     private String message;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -20,9 +20,20 @@ public class Notifications {
     @Column(nullable = false)
     private boolean active=true;
 
+    @Column(nullable = false)
+    private boolean deleet=false;
+
+    private String email;
+
     public Notifications(String message, Users user, boolean active) {
         this.message = message;
         this.user = user;
+        this.active = active;
+    }
+
+    public Notifications(String message, String email, boolean active) {
+        this.message = message;
+        this.email = email;
         this.active = active;
     }
 
@@ -59,5 +70,21 @@ public class Notifications {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public boolean isDelete() {
+        return deleet;
+    }
+
+    public void setDelete(boolean delete) {
+        this.deleet = delete;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
